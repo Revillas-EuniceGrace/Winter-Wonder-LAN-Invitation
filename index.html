@@ -160,6 +160,7 @@
     border:2px solid var(--ink);border-radius:14px 10px 16px 12px;padding:6px 20px 8px;cursor:pointer;
     box-shadow:4px 4px 0 var(--powder);transform:rotate(-1deg);transition:transform .15s,box-shadow .15s,background .2s;
   }
+  .btn{white-space:nowrap}.counter{white-space:nowrap}
   .btn svg{width:26px;height:20px}
   .btn:hover{transform:rotate(1deg) translate(-1px,-2px);box-shadow:6px 6px 0 var(--powder)}
   .btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--powder)}
@@ -170,19 +171,20 @@
   @keyframes nudge{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(-1deg) translateY(-5px)}}
 
   /* ---------- Letter ---------- */
+  .fit{transform:scale(var(--fit,1));transform-origin:center center;flex:0 0 auto}
   .paper-wrap{position:relative;width:min(580px,94vw);filter:drop-shadow(0 18px 26px rgba(40,64,91,.25));transition:transform .7s cubic-bezier(.6,-0.2,.7,1),opacity .6s ease}
   #letter-scene.active .paper-wrap{animation:paperIn .8s cubic-bezier(.34,1.4,.64,1)}
   @keyframes paperIn{from{transform:translateY(40vh) scale(.5) rotate(4deg);opacity:0}to{transform:none;opacity:1}}
   .paper-wrap.folding{transform:translateY(30vh) scale(.35) rotate(-6deg);opacity:0}
   .torn{height:14px;background-repeat:repeat-x;background-size:220px 14px;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 14'%3E%3Cpath d='M0 14V7l9-4 7 5 10-6 8 6 11-3 7 4 12-5 6 6 10-4 9 3 8-6 11 7 9-4 8 3 12-5 7 6 9-3 10 4 8-6 11 5 9-3 8 4V14Z' fill='%23fbfaf5'/%3E%3C/svg%3E")}
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 14'%3E%3Cpath d='M0 14V7l9-4 7 5 10-6 8 6 11-3 7 4 12-5 6 6 10-4 9 3 8-6 11 7 9-4 8 3 12-5 7 6 9-3 10 4 8-6 11 5 9-3 8 4 21 1V14Z' fill='%23fbfaf5'/%3E%3C/svg%3E")}
   .torn.bottom{transform:scaleY(-1)}
   .paper{
-    position:relative;max-height:80vh;overflow-y:auto;overflow-x:hidden;background-color:var(--paper);
+    position:relative;background-color:var(--paper);
     background-image:
       linear-gradient(90deg,transparent 46px,rgba(152,185,212,.55) 46px 48px,transparent 48px),
       repeating-linear-gradient(transparent 0 33px,rgba(104,149,188,.14) 33px 34px);
-    padding:22px 28px 18px 66px;scrollbar-width:thin;scrollbar-color:var(--powder) transparent;
+    padding:22px 28px 18px 66px;
   }
   .tape{position:absolute;z-index:4;width:120px;height:32px;background:rgba(152,185,212,.7);
     clip-path:polygon(3% 0,97% 4%,100% 22%,97% 44%,100% 66%,97% 100%,4% 96%,0 74%,3% 50%,0 26%)}
@@ -270,10 +272,21 @@
     .p1-grid{grid-template-columns:1fr;gap:6px}
     .p1-left{display:flex;gap:18px;align-items:center}
     .time-note{margin-top:0}
-    .notes{grid-template-columns:1fr}
+    .notes{gap:12px}
+    .note{padding:22px 10px 12px}
+    .note .ic{width:36px;height:36px}
+    .note h3{font-size:1.1rem}
+    .note p,.note .when{font-size:1.02rem}
+    .stamps{grid-template-columns:repeat(3,1fr);gap:10px}
+    .stamp .em{font-size:1.5rem}
+    .stamp .nm{font-size:.95rem}
+    .page3-text{font-size:1.15rem}
+    .postmark{width:60px;height:60px}
+    .nav .btn{font-size:1.15rem;padding:5px 14px 7px}
     .snowman{left:2vw;bottom:6vh}.baby-penguin{left:calc(2vw + 90px)}.penguin-walk{right:3vw;bottom:5vh}
     .env-hint svg{display:none}
   }
+  @media (max-height:520px){.envelope{width:min(300px,55vh*1.5)}.env-hint{margin-bottom:8px}.tap-me{margin-top:14px}}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -415,6 +428,7 @@
 
 <!-- Scene 3: Letter -->
 <section class="scene" id="letter-scene">
+  <div class="fit" id="fit">
   <div class="paper-wrap" id="paperWrap">
     <div class="tape t1"></div><div class="tape t2"></div>
     <div class="torn"></div>
@@ -423,7 +437,7 @@
       <!-- Page 1 -->
       <div class="page" data-page="0">
         <div class="presents">ITPC presents</div>
-        <h2 class="card-title">Winter Wonder-LAN
+        <h2 class="card-title">Winter Wonder&#8209;LAN
           <svg class="u doodle" viewBox="0 0 300 16" preserveAspectRatio="none"><use href="#i-squiggle"/></svg>
         </h2><br>
         <div class="label-tag">our year-end party</div>
@@ -458,7 +472,7 @@
           <div class="note">
             <div class="tape"></div>
             <svg class="ic doodle" viewBox="0 0 48 48"><use href="#i-gift"/></svg>
-            <h3>Exchange-Gift</h3>
+            <h3>Xchange-Gift</h3>
             <p>Send your <span class="hl">name</span> and a <span class="hl">3-item wish list</span>.</p>
             <div class="when"><b>due:</b> Nov 16 – 18<br><b>draw:</b> Nov 19 – 20</div>
           </div>
@@ -500,6 +514,7 @@
       </div>
     </div>
     <div class="torn bottom"></div>
+  </div>
   </div>
 </section>
 
@@ -653,13 +668,21 @@
   const ARROW = '<svg class="doodle" viewBox="0 0 52 30"><use href="#i-arrow"/></svg>';
   const CHECK = '<svg class="doodle" viewBox="0 0 48 48" style="width:22px;height:22px"><use href="#i-check"/></svg>';
   let current = 0;
+  const fitEl = $('#fit'), wrap = $('#paperWrap');
+  function fit() {
+    const h = wrap.offsetHeight + 30, w = wrap.offsetWidth + 24;
+    const sc = Math.min(1, (innerHeight - 24) / h, (innerWidth - 8) / w);
+    fitEl.style.setProperty('--fit', sc.toFixed(3));
+  }
+  addEventListener('resize', fit);
+  if (document.fonts) document.fonts.ready.then(fit);
   function goPage(i, back = false) {
     current = i;
     pages.forEach((p, idx) => { p.classList.remove('active', 'back'); if (idx === i) { p.classList.add('active'); if (back) p.classList.add('back'); } });
     backBtn.classList.toggle('invisible', i === 0);
     $('#counter').textContent = `${i + 1} / ${pages.length}`;
     nextBtn.innerHTML = i === pages.length - 1 ? `done reading ${CHECK}` : `next ${ARROW}`;
-    $('#paper').scrollTop = 0;
+    fit();
   }
   nextBtn.onclick = () => current < pages.length - 1 ? goPage(current + 1) : finish();
   backBtn.onclick = () => current > 0 && goPage(current - 1, true);
@@ -669,6 +692,7 @@
     $$('.stamp').forEach(s => s.classList.remove('selected'));
     st.classList.add('selected');
     $('#reactNote').textContent = `got it, ${st.dataset.name}! now go react ${st.dataset.em} on the announcement.`;
+    fit();
     const r = st.getBoundingClientRect();
     burst(r.left + r.width / 2, r.top + r.height / 2, 26);
   });
