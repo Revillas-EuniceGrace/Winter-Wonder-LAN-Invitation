@@ -110,6 +110,7 @@
   .big-title .ch{display:inline-block;opacity:0;transform:translateY(30px) rotate(-10deg) scale(.3);animation:letterPop .55s cubic-bezier(.34,1.56,.64,1) forwards}
   .big-title .ch:nth-child(odd){--r:-3deg}.big-title .ch:nth-child(even){--r:3deg}
   .big-title .lan{color:var(--powder)}
+  .word{display:inline-block;white-space:nowrap}
   @keyframes letterPop{to{opacity:1;transform:translateY(0) rotate(var(--r)) scale(1)}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
   .intro-sub{position:relative;display:inline-block;font-family:var(--hand);font-size:clamp(1.3rem,3vw,1.8rem);color:var(--ink);margin-top:20px;opacity:0;animation:fadeUp .8s ease 1.9s forwards}
@@ -285,6 +286,9 @@
     .nav .btn{font-size:1.15rem;padding:5px 14px 7px}
     .snowman{left:2vw;bottom:6vh}.baby-penguin{left:calc(2vw + 90px)}.penguin-walk{right:3vw;bottom:5vh}
     .env-hint svg{display:none}
+    .big-title{font-size:clamp(2.4rem,12vw,4rem);line-height:1.05}
+    .big-title .word{display:block}
+    .big-title .sp{display:none}
   }
   @media (max-height:520px){.envelope{width:min(300px,55vh*1.5)}.env-hint{margin-bottom:8px}.tap-me{margin-top:14px}}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
