@@ -626,12 +626,21 @@
   function show(id) { $$('.scene').forEach(s => s.classList.remove('active')); $(id).classList.add('active'); }
   function splitLetters(el, text, start, step, cls) {
     el.innerHTML = '';
+    let word = null;
     [...text].forEach((c, i) => {
       const s = document.createElement('span');
+      if (c === ' ') {
+        s.className = 'sp';
+        s.textContent = ' ';
+        el.appendChild(s);
+        word = null;
+        return;
+      }
+      if (!word) { word = document.createElement('span'); word.className = 'word'; el.appendChild(word); }
       s.className = 'ch' + (cls ? ' ' + cls(c, i) : '');
-      s.textContent = c === ' ' ? ' ' : c;
+      s.textContent = c;
       s.style.animationDelay = (start + i * step) + 's';
-      el.appendChild(s);
+      word.appendChild(s);
     });
   }
   // restart CSS line-draw animations
